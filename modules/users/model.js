@@ -80,7 +80,11 @@ let columns = {
 	},
 	jenis_kelamin: {
 		type: DataTypes.CHAR(1),
-		comment: 'L: Laki; P:Perempuan;'
+		comment: 'L: Laki; P: Perempuan;'
+	},
+	marital: {
+		type: DataTypes.CHAR(1),
+		comment: 'S: Single; M: Menikah; D: Cerai; W: ditinggal Mati;'
 	},
 	tempat_lahir: {
 		type: DataTypes.STRING

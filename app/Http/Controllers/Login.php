@@ -146,6 +146,9 @@ class Login extends Controller {
     	if($request->has('jenis_kelamin') && $request->post('jenis_kelamin') !== NULL && $request->post('jenis_kelamin') !== '') {
     		$datauser['jenis_kelamin'] = $request->post('jenis_kelamin');
     	}
+    	if($request->has('marital') && $request->post('marital') !== NULL && $request->post('marital') !== '') {
+    		$datauser['marital'] = $request->post('marital');
+    	}
     	if($request->has('tempat_lahir') && $request->post('tempat_lahir') !== NULL && $request->post('tempat_lahir') !== '') {
     		$datauser['tempat_lahir'] = $request->post('tempat_lahir');
     	}
@@ -349,6 +352,9 @@ class Login extends Controller {
     	}
     	if($request->has('jenis_kelamin') && $request->post('jenis_kelamin') !== NULL && $request->post('jenis_kelamin') !== '') {
     		$datauser['jenis_kelamin'] = $request->post('jenis_kelamin');
+    	}
+    	if($request->has('marital') && $request->post('marital') !== NULL && $request->post('marital') !== '') {
+    		$datauser['marital'] = $request->post('marital');
     	}
     	if($request->has('tempat_lahir') && $request->post('tempat_lahir') !== NULL && $request->post('tempat_lahir') !== '') {
     		$datauser['tempat_lahir'] = $request->post('tempat_lahir');
