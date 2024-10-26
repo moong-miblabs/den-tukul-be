@@ -69,4 +69,5 @@ $controller = 'Login';
 $router->group(['prefix' => 'login'], function () use ($router,$controller) {
     $router->post('register', ['uses' => $controller.'@register']);
     $router->post('login', ['uses' => $controller.'@login']);
+    $router->post('enroll', ['uses' => $controller.'@enroll']);
 });
