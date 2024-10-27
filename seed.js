@@ -23541,6 +23541,19 @@ INSERT INTO ref_kelurahan (id, nama_kelurahan, kecamatan_id, created_at, updated
 INSERT INTO ref_kelurahan (id, nama_kelurahan, kecamatan_id, created_at, updated_at) VALUES ('3674010005', 'Babakan', '286307', NOW(), NOW()) ON CONFLICT (id) DO NOTHING;
 INSERT INTO ref_kelurahan (id, nama_kelurahan, kecamatan_id, created_at, updated_at) VALUES ('3674010006', 'Bakti Jaya', '286307', NOW(), NOW()) ON CONFLICT (id) DO NOTHING;
 
+
+INSERT INTO users(id,nama_user,email_user,whatsapp_user,username_user,password_user,created_at,updated_at) VALUES
+    ('aaaaaaaaaaaaaaaaaaaaa','a','a@gmail.com','6285741228893','a','\$2a\$10\$DNMSD58vDTm8QrItQQcCK.crTa4ZB3G.hY46d1SF7i91pR7MUz1lO',NOW(),NOW()),
+    ('rrrrrrrrrrrrrrrrrrrrr','r','r@gmail.com','6285741228894','r','\$2a\$10\$M2XTT/KQ.omrayOePjySXeQJ1CHdK8MQcemwPnfGn8BaVJVUTOoQC',NOW(),NOW()),
+    ('bbbbbbbbbbbbbbbbbbbbb','b','b@gmail.com','6285741228895','b','\$2a\$10\$3h82NTnionWhnT8sgPBj5OdeUKoadWWUModjqS5dGulpqZDzML3o6',NOW(),NOW())
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO user_role(id,user_id,role_id,created_at,updated_at) VALUES
+    ('bpBxmsOLlWL87aNZrN3tB','aaaaaaaaaaaaaaaaaaaaa','AAAAAAAAAAAAAAAAAAAAA',NOW(),NOW()),
+    ('a8jiK5XzDJSjgddxURLkN','rrrrrrrrrrrrrrrrrrrrr','RRRRRRRRRRRRRRRRRRRRR',NOW(),NOW()),
+    ('kmjKuAsadS7cgsPCMl16d','bbbbbbbbbbbbbbbbbbbbb','AAAAAAAAAAAAAAAAAAAAA',NOW(),NOW()),
+    ('XLbxZc4lIi1R7N6iJBnJ9','bbbbbbbbbbbbbbbbbbbbb','RRRRRRRRRRRRRRRRRRRRR',NOW(),NOW())
+ON CONFLICT (id) DO NOTHING;
 `
 const client = new Client({
   user: env('DB_USERNAME'),
