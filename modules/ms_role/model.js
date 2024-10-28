@@ -9,6 +9,9 @@ let columns = {
 	nama_role: {
 		type: DataTypes.STRING,
 	},
+	urut: {
+		type: DataTypes.SMALLINT
+	}
 }
 
 let allias = 'rl'

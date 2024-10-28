@@ -220,7 +220,7 @@ class Login extends Controller {
     	});
     	$data = $datas[0];
 
-    	$data_role = DB::select("SELECT nama_role from user_role ur LEFT JOIN ms_role rl ON ur.role_id = rl.id WHERE ur.user_id = ?",[$data->id]);
+    	$data_role = DB::select("SELECT nama_role from user_role ur LEFT JOIN ms_role rl ON ur.role_id = rl.id WHERE ur.user_id = ? ORDER BY rl.urut",[$data->id]);
     	$role = '';
     	if(!empty($data_role)) {
     		$arr = [];
@@ -426,7 +426,7 @@ class Login extends Controller {
     	});
     	$data = $datas[0];
 
-    	$data_role = DB::select("SELECT nama_role from user_role ur LEFT JOIN ms_role rl ON ur.role_id = rl.id WHERE ur.user_id = ?",[$data->id]);
+    	$data_role = DB::select("SELECT nama_role from user_role ur LEFT JOIN ms_role rl ON ur.role_id = rl.id WHERE ur.user_id = ? ORDER BY rl.urut",[$data->id]);
     	$role = '';
     	if(!empty($data_role)) {
     		$arr = [];
@@ -617,7 +617,7 @@ class Login extends Controller {
     	}
 
 
-    	$data_role = DB::select("SELECT nama_role from user_role ur LEFT JOIN ms_role rl ON ur.role_id = rl.id WHERE ur.user_id = ?",[$data->id]);
+    	$data_role = DB::select("SELECT nama_role from user_role ur LEFT JOIN ms_role rl ON ur.role_id = rl.id WHERE ur.user_id = ? ORDER BY rl.urut",[$data->id]);
     	$role = '';
     	if(!empty($data_role)) {
     		$arr = [];
