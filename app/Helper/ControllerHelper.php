@@ -15,8 +15,14 @@ class ControllerHelper{
         }
     }
 
-    public static function stringToSingleArray(string $str) : array {
-        return explode(',',$str);
+    public static function stringToSingleArray(string $str, array $substitute = []) : array {
+        if(empty($substitute)) return explode(',',$str);
+        $arr = explode(',',$str);
+        $mapped = array_map(function ($value) use ($substitute) {
+            if(empty($substitute[$value])) return $value;
+            return $substitute[$value];
+        },$arr);
+        return $mapped;
     }
 
     public static function stringToMultipleArray(string $str) : array {

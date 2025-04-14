@@ -71,3 +71,9 @@ $router->group(['prefix' => 'login'], function () use ($router,$controller) {
     $router->post('login', ['uses' => $controller.'@login']);
     $router->post('enroll', ['uses' => $controller.'@enroll']);
 });
+
+$controller = 'Deteksi';
+$router->group(['prefix' => 'deteksi'], function () use ($router,$controller) {
+    $router->post('register', ['uses' => $controller.'@register','middleware'=>'is_responden']);
+    $router->get('/', ['uses' => $controller.'@get','middleware'=>'is_admin']);
+});

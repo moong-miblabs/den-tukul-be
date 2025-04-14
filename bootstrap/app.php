@@ -76,9 +76,11 @@ $app->middleware([
     App\Http\Middleware\CorsMiddleware::class
 ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\AuthMiddleware::class,
+    'is_responden' => App\Http\Middleware\IsResponden::class,
+    'is_admin' => App\Http\Middleware\IsAdmin::class,
+]);
 
 /*
 |--------------------------------------------------------------------------

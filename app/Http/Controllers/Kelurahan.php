@@ -19,7 +19,7 @@ class Kelurahan extends Controller {
 
     	$count->cols(['COUNT(*) as jumlah']);
     	if($request->has('attributes') && $request->get('attributes') !== NULL && $request->get('attributes') !== '') {
-    		$select->cols(ControllerHelper::stringToSingleArray($request->get('attributes')));
+    		$select->cols(ControllerHelper::stringToSingleArray($request->get('attributes'),['id'=>'kl.id']));
     	} else {
     		$select->cols(['kl.id','nama_kelurahan','kecamatan_id','nama_kecamatan','kab_kota_id','nama_kab_kota','provinsi_id','nama_provinsi']);
     	}

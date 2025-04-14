@@ -17,7 +17,7 @@ class KabKota extends Controller {
 
     	$count->cols(['COUNT(*) as jumlah']);
     	if($request->has('attributes') && $request->get('attributes') !== NULL && $request->get('attributes') !== '') {
-    		$select->cols(ControllerHelper::stringToSingleArray($request->get('attributes')));
+    		$select->cols(ControllerHelper::stringToSingleArray($request->get('attributes'),['id'=>'kk.id']));
     	} else {
     		$select->cols(['kk.id','nama_kab_kota','provinsi_id','nama_provinsi']);
     	}

@@ -2,13 +2,13 @@
 1. npm init -y
 1. npm install
 	1. dotenv
-	1. pg & pg-hstore
+	1. pg & pg-hstore / mysql2
 	1. sequelize
 1. update package.json (type : "module")
-1. composer install
+1. composer require
 	1. aura/sqlquery
 	1. firebase/php-jwt
-	1. hidehelo/nanoid-php
+	1. hidehalo/nanoid-php
 	1. nesbot/carbon 2.72.5
 	1. pyaesoneaung/to-raw-sql
 	1. respect/validation
@@ -35,6 +35,7 @@
 1. buat `CorsMiddleware.php` pada `app/Http/Middleware`
 1. daftarkan middleware di `bootstrap/app.php`
 1. `Exception` untuk `404 Not Found`
+1. `Exception` untuk selain `404 Not Found`
 1. uncomment `// $app->withFacades();` menjadi `$app->withFacades();` di file `bootstrap.php/app.php`
 1. App/Helper
 	1. Controller Helper

@@ -18,7 +18,7 @@ class Kecamatan extends Controller {
 
     	$count->cols(['COUNT(*) as jumlah']);
     	if($request->has('attributes') && $request->get('attributes') !== NULL && $request->get('attributes') !== '') {
-    		$select->cols(ControllerHelper::stringToSingleArray($request->get('attributes')));
+    		$select->cols(ControllerHelper::stringToSingleArray($request->get('attributes'),['id'=>'kc.id']));
     	} else {
     		$select->cols(['kc.id','nama_kecamatan','kab_kota_id','nama_kab_kota','provinsi_id','nama_provinsi']);
     	}
