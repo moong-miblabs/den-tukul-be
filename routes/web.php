@@ -77,3 +77,9 @@ $router->group(['prefix' => 'deteksi'], function () use ($router,$controller) {
     $router->post('register', ['uses' => $controller.'@register','middleware'=>'is_responden']);
     $router->get('/', ['uses' => $controller.'@get','middleware'=>'is_admin']);
 });
+
+$controller = 'Intervensi';
+$router->group(['prefix' => 'intervensi'], function () use ($router,$controller) {
+    $router->post('register', ['uses' => $controller.'@register','middleware'=>'is_responden']);
+    $router->get('/', ['uses' => $controller.'@get','middleware'=>'is_admin']);
+});
