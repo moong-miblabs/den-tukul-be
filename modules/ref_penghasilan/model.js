@@ -11,8 +11,6 @@ let columns = {
 	}
 }
 
-let allias = 'ph'
-
 const Penghasilan = sq.define('ref_penghasilan',
 	columns,
 	{
@@ -24,5 +22,25 @@ const Penghasilan = sq.define('ref_penghasilan',
 	    deletedAt: 'deleted_at',
 	}
 )
+
+Penghasilan.allias = 'ph'
+
+Penghasilan.$columns = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Penghasilan.allias}.${str}`).join(',');
+}
+
+Penghasilan.$colAllias = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Penghasilan.allias}.${str} AS ${Penghasilan.allias}__${str}`).join(',');
+}
 
 export default Penghasilan

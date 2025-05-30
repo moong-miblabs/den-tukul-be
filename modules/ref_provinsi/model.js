@@ -19,8 +19,6 @@ let columns = {
 	}
 }
 
-let allias = 'pr'
-
 const Provinsi = sq.define('ref_provinsi',
 	columns,
 	{
@@ -32,5 +30,25 @@ const Provinsi = sq.define('ref_provinsi',
 	    deletedAt: 'deleted_at',
 	}
 )
+
+Provinsi.allias = 'pr'
+
+Provinsi.$columns = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Provinsi.allias}.${str}`).join(',');
+}
+
+Provinsi.$colAllias = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Provinsi.allias}.${str} AS ${Provinsi.allias}__${str}`).join(',');
+}
 
 export default Provinsi

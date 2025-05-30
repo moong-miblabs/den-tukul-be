@@ -56,8 +56,6 @@ let columns = {
 	}
 }
 
-let allias = 'dt'
-
 const Deteksi = sq.define('deteksi',
 	columns,
 	{
@@ -72,5 +70,25 @@ const Deteksi = sq.define('deteksi',
 
 UserRole.hasMany(Deteksi, { foreignKey: 'user_role_id' })
 Deteksi.belongsTo(UserRole, { foreignKey: 'user_role_id' })
+
+Deteksi.allias = 'dt'
+
+Deteksi.$columns = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Deteksi.allias}.${str}`).join(',');
+}
+
+Deteksi.$colAllias = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Deteksi.allias}.${str} AS ${Deteksi.allias}__${str}`).join(',');
+}
 
 export default Deteksi

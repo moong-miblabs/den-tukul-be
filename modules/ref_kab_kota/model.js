@@ -20,8 +20,6 @@ let columns = {
 	}
 }
 
-let allias = 'kk'
-
 const KabKota = sq.define('ref_kab_kota',
 	columns,
 	{
@@ -36,5 +34,25 @@ const KabKota = sq.define('ref_kab_kota',
 
 Provinsi.hasMany(KabKota, { foreignKey: 'provinsi_id' })
 KabKota.belongsTo(Provinsi, { foreignKey: 'provinsi_id' })
+
+KabKota.allias = 'kk'
+
+KabKota.$columns = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${KabKota.allias}.${str}`).join(',');
+}
+
+KabKota.$colAllias = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${KabKota.allias}.${str} AS ${KabKota.allias}__${str}`).join(',');
+}
 
 export default KabKota

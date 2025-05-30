@@ -1,23 +1,27 @@
 import { DataTypes } from 'sequelize';
 import sq from '../../database.js'
 
-import Users from '../users/model.js'
-import Role from '../ms_role/model.js'
+import UserRole from '../user_role/model.js'
 
 let columns = {
 	id: {
 		type: DataTypes.CHAR(21),
 		primaryKey: true
 	},
-	user_id: {
+	user_role_id: {
 		type: DataTypes.CHAR(21),
 	},
-	role_id: {
-		type: DataTypes.CHAR(21),
+	n: {
+		type: DataTypes.SMALLINT,
+		comment: "number"
+	},
+	a: {
+		type: DataTypes.SMALLINT,
+		comment: "answer"
 	}
 }
 
-const UserRole = sq.define('user_role',
+const EvaluasiPraktik = sq.define('evaluasi_praktik',
 	columns,
 	{
 		freezeTableName: true,
@@ -29,30 +33,27 @@ const UserRole = sq.define('user_role',
 	}
 )
 
-Users.hasMany(UserRole, { foreignKey: 'user_id'})
-UserRole.belongsTo(Users, { foreignKey: 'user_id' })
+UserRole.hasMany(EvaluasiPraktik, { foreignKey: 'user_role_id'})
+EvaluasiPraktik.belongsTo(UserRole, { foreignKey: 'user_role_id' })
 
-Role.hasMany(UserRole, { foreignKey: 'role_id'})
-UserRole.belongsTo(Role, { foreignKey: 'role_id' })
+EvaluasiPraktik.allias = 'ep'
 
-UserRole.allias = 'ur'
-
-UserRole.$columns = (whitelist=[]) => {
+EvaluasiPraktik.$columns = (whitelist=[]) => {
 	let arr = Object.keys(columns)
 	/*===*/ arr.push('created_at'); arr.push('updated_at');
 	if(whitelist.length) {
 		arr = arr.filter(value => whitelist.includes(value))
 	}
-	return arr.map(str => `${UserRole.allias}.${str}`).join(',');
+	return arr.map(str => `${EvaluasiPraktik.allias}.${str}`).join(',');
 }
 
-UserRole.$colAllias = (whitelist=[]) => {
+EvaluasiPraktik.$colAllias = (whitelist=[]) => {
 	let arr = Object.keys(columns)
 	/*===*/ arr.push('created_at'); arr.push('updated_at');
 	if(whitelist.length) {
 		arr = arr.filter(value => whitelist.includes(value))
 	}
-	return arr.map(str => `${UserRole.allias}.${str} AS ${UserRole.allias}__${str}`).join(',');
+	return arr.map(str => `${EvaluasiPraktik.allias}.${str} AS ${EvaluasiPraktik.allias}__${str}`).join(',');
 }
 
-export default UserRole
+export default EvaluasiPraktik

@@ -3,6 +3,16 @@ import pg from 'pg'
 const { Client } = pg
 
 let raw = `
+	DROP TABLE IF EXISTS evaluasi_dukungan;
+	DROP TABLE IF EXISTS evaluasi_motivasi;
+	DROP TABLE IF EXISTS evaluasi_praktik;
+	DROP TABLE IF EXISTS evaluasi_sikap;
+	DROP TABLE IF EXISTS evaluasi_pengetahuan;
+
+	DROP TABLE IF EXISTS deteksi;
+
+	DROP TABLE IF EXISTS intervensi;
+	
 	DROP TABLE IF EXISTS user_role;
 	DROP TABLE IF EXISTS users;
 	DROP TABLE IF EXISTS ms_role;

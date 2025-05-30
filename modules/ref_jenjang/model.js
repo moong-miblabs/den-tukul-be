@@ -11,8 +11,6 @@ let columns = {
     }
 }
 
-let allias = 'jj'
-
 const Jenjang = sq.define('ref_jenjang',
     columns,
     {
@@ -24,5 +22,25 @@ const Jenjang = sq.define('ref_jenjang',
         deletedAt: 'deleted_at',
     }
 )
+
+Jenjang.allias = 'jj'
+
+Jenjang.$columns = (whitelist=[]) => {
+    let arr = Object.keys(columns)
+    /*===*/ arr.push('created_at'); arr.push('updated_at');
+    if(whitelist.length) {
+        arr = arr.filter(value => whitelist.includes(value))
+    }
+    return arr.map(str => `${Jenjang.allias}.${str}`).join(',');
+}
+
+Jenjang.$colAllias = (whitelist=[]) => {
+    let arr = Object.keys(columns)
+    /*===*/ arr.push('created_at'); arr.push('updated_at');
+    if(whitelist.length) {
+        arr = arr.filter(value => whitelist.includes(value))
+    }
+    return arr.map(str => `${Jenjang.allias}.${str} AS ${Jenjang.allias}__${str}`).join(',');
+}
 
 export default Jenjang

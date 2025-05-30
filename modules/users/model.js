@@ -136,8 +136,6 @@ let columns = {
 	}
 }
 
-let allias = 'uu'
-
 const Users = sq.define('users',
 	columns,
 	{
@@ -174,5 +172,24 @@ Users.belongsTo(Penghasilan, { foreignKey: 'penghasilan_id' })
 Jenjang.hasMany(Users, { foreignKey: 'jenjang_id' })
 Users.belongsTo(Jenjang, { foreignKey: 'jenjang_id' })
 
+Users.allias = 'uu'
+
+Users.$columns = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Users.allias}.${str}`).join(',');
+}
+
+Users.$colAllias = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Users.allias}.${str} AS ${Users.allias}__${str}`).join(',');
+}
 
 export default Users

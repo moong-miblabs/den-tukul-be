@@ -11,8 +11,6 @@ let columns = {
 	}
 }
 
-let agama = 'ag'
-
 const Agama = sq.define('ref_agama',
 	columns,
 	{
@@ -24,5 +22,25 @@ const Agama = sq.define('ref_agama',
 	    deletedAt: 'deleted_at',
 	}
 )
+
+Agama.allias = 'ag'
+
+Agama.$columns = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Agama.allias}.${str}`).join(',');
+}
+
+Agama.$colAllias = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Agama.allias}.${str} AS ${Agama.allias}__${str}`).join(',');
+}
 
 export default Agama

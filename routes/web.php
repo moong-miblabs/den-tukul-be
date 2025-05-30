@@ -83,3 +83,11 @@ $router->group(['prefix' => 'intervensi'], function () use ($router,$controller)
     $router->post('register', ['uses' => $controller.'@register','middleware'=>'is_responden']);
     $router->get('/', ['uses' => $controller.'@get','middleware'=>'is_admin']);
 });
+
+$controller = 'Evaluasi';
+$router->group(['prefix' => 'evaluasi'], function () use ($router,$controller) {
+    $router->post('/', ['uses' => $controller.'@register','middleware'=>'is_responden']);
+    $router->get('/', ['uses' => $controller.'@list','middleware'=>'is_admin']);
+    $router->get('/{user_role_id}', ['uses' => $controller.'@listCreatedAt','middleware'=>'is_admin']);
+    $router->get('/{user_role_id}/{created_at}', ['uses' => $controller.'@detailsById','middleware'=>'is_admin']);
+});

@@ -47,8 +47,6 @@ let columns = {
 	}
 }
 
-let allias = 'dt'
-
 const Intervensi = sq.define('intervensi',
 	columns,
 	{
@@ -63,5 +61,25 @@ const Intervensi = sq.define('intervensi',
 
 UserRole.hasMany(Intervensi, { foreignKey: 'user_role_id' })
 Intervensi.belongsTo(UserRole, { foreignKey: 'user_role_id' })
+
+Intervensi.allias = 'et'
+
+Intervensi.$columns = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at');
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Intervensi.allias}.${str}`).join(',');
+}
+
+Intervensi.$colAllias = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at'); 
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Intervensi.allias}.${str} AS ${Intervensi.allias}__${str}`).join(',');
+}
 
 export default Intervensi

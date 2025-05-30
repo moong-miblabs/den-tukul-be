@@ -14,8 +14,6 @@ let columns = {
 	}
 }
 
-let allias = 'rl'
-
 const Role = sq.define('ms_role',
 	columns,
 	{
@@ -27,5 +25,25 @@ const Role = sq.define('ms_role',
 	    deletedAt: 'deleted_at',
 	}
 )
+
+Role.allias = 'rl'
+
+Role.$columns = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at'); 
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Role.allias}.${str}`).join(',');
+}
+
+Role.$colAllias = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	/*===*/ arr.push('created_at'); arr.push('updated_at'); 
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	return arr.map(str => `${Role.allias}.${str} AS ${Role.allias}__${str}`).join(',');
+}
 
 export default Role

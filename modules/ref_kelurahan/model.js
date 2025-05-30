@@ -20,8 +20,6 @@ let columns = {
 	}
 }
 
-let allias = 'kl'
-
 const Kelurahan = sq.define('ref_kelurahan',
 	columns,
 	{
@@ -36,5 +34,25 @@ const Kelurahan = sq.define('ref_kelurahan',
 
 Kecamatan.hasMany(Kelurahan, { foreignKey: 'kecamatan_id' })
 Kelurahan.belongsTo(Kecamatan, { foreignKey: 'kecamatan_id' })
+
+Kelurahan.allias = 'kl'
+
+Kelurahan.$columns = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	/*===*/ arr.push('created_at'); arr.push('updated_at'); 
+	return arr.map(str => `${Kelurahan.allias}.${str}`).join(',');
+}
+
+Kelurahan.$colAllias = (whitelist=[]) => {
+	let arr = Object.keys(columns)
+	if(whitelist.length) {
+		arr = arr.filter(value => whitelist.includes(value))
+	}
+	/*===*/ arr.push('created_at'); arr.push('updated_at'); 
+	return arr.map(str => `${Kelurahan.allias}.${str} AS ${Kelurahan.allias}__${str}`).join(',');
+}
 
 export default Kelurahan
