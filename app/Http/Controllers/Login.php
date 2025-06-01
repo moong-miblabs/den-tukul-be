@@ -30,24 +30,6 @@ class Login extends Controller {
     		$message .= ($fail?' dan ':'') . 'username';
     		$fail = TRUE;
     	}
-    	if(!$request->has('whatsapp_user') || $request->post('whatsapp_user') === '' || $request->post('whatsapp_user') === NULL) {
-    		$desc['whatsapp_user'] = "required";
-    		$message .= ($fail?' dan ':'') . 'whatsapp';
-    		$fail = TRUE;
-    	} elseif(!v::startsWith('62')->numericVal()->validate($request->post('whatsapp_user'))) {
-    		$desc['whatsapp_user'] = "not valid";
-    		$add_message .= " 'whatsapp' harus berisi angka dan diawali dengan 62;"; 
-    		$fail = TRUE;
-    	}
-    	if(!$request->has('email_user') || $request->post('email_user') === '' || $request->post('email_user') === NULL) {
-    		$desc['email_user'] = "required";
-    		$message .= ($fail?' dan ':'') . 'email';
-    		$fail = TRUE;
-    	} elseif(!v::email()->validate($request->post('email_user'))) {
-    		$desc['email_user'] = "not valid";
-    		$add_message .= " 'email' tidak valid;"; 
-    		$fail = TRUE;
-    	}
     	if(!$request->has('password_user') || $request->post('password_user') === '' || $request->post('password_user') === NULL) {
     		$desc['password_user'] = "required";
     		$message .= ($fail?' dan ':'') . 'password';
