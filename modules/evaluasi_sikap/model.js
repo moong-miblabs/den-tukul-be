@@ -18,6 +18,13 @@ let columns = {
 	a: {
 		type: DataTypes.CHAR(2),
 		comment: "SS: Selalu; SR: Sering; KD: kadang; TP: Tidak Pernah"
+	},
+	s: {
+		type: DataTypes.SMALLINT,
+		comment: "score"
+	},
+	result_id: {
+		type: DataTypes.CHAR(21)
 	}
 }
 

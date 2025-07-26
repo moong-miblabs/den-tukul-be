@@ -6,16 +6,16 @@ class Ref {
 const ref = (val) => new Ref(val)
 
 const PERTANYAAN = [
-	"Tuberculosis paru adalah suatu penyakit infeksi yang disebabkan oleh bakteri Microbakterium Tuberkulosa",
-	"Penyakit tuberculosis dapat menular melalui alat makan.",
-	"Gejala yang dirasakan penderita tuberculosis adalah batuk lebih dari 3 minggu, demam dan disertai influenza",
-	"Nyeri dada, sesak napas dan batuk berdarah adalah tanda dan gejala penderita penyakit tuberculosis.",
-	"Badan lemah, nafsu makan menurun, berat badan turun, kurang enak badan bukan merupakan gejala-gejala tuberculosis",
-	"Penyakit Tuberculosis tidak dapat ditularkan melalui percikan dahak dan bersin penderita tuberculosis",
-	"Apakah Minum obat dengan teratur termasuk kedalam pencegahan penyakit tuberculosis",
-	"Menutup mulut waktu batuk dan bersin termasuk dalam pencegahan tuberculosis",
-	"Dahak penderita tuberculosis tidak perlu ditampung dalam wadah khusus",
-	"Meningkatkan daya tahan tubuh dengan makan makanan yang bergizi termasuk kedalam pencegahan penyakit tuberculosis"
+	"TB (tuberkulosis) adalah penyakit yang disebabkan oleh kuman yang menyerang paru-paru.",
+	"TB bisa menular lewat alat makan seperti sendok dan piring.",
+	"Orang yang sakit TB biasanya batuk lama lebih dari 3 minggu, demam, dan seperti flu.",
+	"Nyeri dada, sesak napas, dan batuk berdarah bisa jadi tanda orang sakit TB.",
+	"Kalau orang lemas, tidak nafsu makan, dan berat badan turun, bisa jadi itu gejala TB.",
+	"TB tidak bisa menular lewat batuk atau bersin dari orang yang sakit.",
+	"Minum obat dengan teratur bisa membantu menyembuhkan TB.",
+	"Menutup mulut saat batuk dan bersin bisa mencegah penyebaran TB ke orang lain.",
+	"Dahak dari orang yang sakit TB tidak perlu dibuang di tempat khusus.",
+	"Makan bergizi bisa membantu tubuh kita melawan penyakit TB."
 ]
 
 const et01 = ref(null)
@@ -30,16 +30,16 @@ const et09 = ref(null)
 const et10 = ref(null)
 
 var data = [
-	{ tipe: "et", n: 1, a: et01.value },
-	{ tipe: "et", n: 2, a: et02.value },
-	{ tipe: "et", n: 3, a: et03.value },
-	{ tipe: "et", n: 4, a: et04.value },
-	{ tipe: "et", n: 5, a: et05.value },
-	{ tipe: "et", n: 6, a: et06.value },
-	{ tipe: "et", n: 7, a: et07.value },
-	{ tipe: "et", n: 8, a: et08.value },
-	{ tipe: "et", n: 9, a: et09.value },
-	{ tipe: "et", n: 10, a: et10.value }
+	{ tipe: "et", n: 1, a: et01.value, s: et01.value=="B"?1:0 },
+	{ tipe: "et", n: 2, a: et02.value, s: et02.value=="S"?1:0 },
+	{ tipe: "et", n: 3, a: et03.value, s: et03.value=="B"?1:0 },
+	{ tipe: "et", n: 4, a: et04.value, s: et04.value=="B"?1:0 },
+	{ tipe: "et", n: 5, a: et05.value, s: et05.value=="B"?1:0 },
+	{ tipe: "et", n: 6, a: et06.value, s: et06.value=="S"?1:0 },
+	{ tipe: "et", n: 7, a: et07.value, s: et07.value=="B"?1:0 },
+	{ tipe: "et", n: 8, a: et08.value, s: et08.value=="B"?1:0 },
+	{ tipe: "et", n: 9, a: et09.value, s: et09.value=="S"?1:0 },
+	{ tipe: "et", n: 10, a: et10.value, s: et10.value=="B"?1:0 }
 ]
 
 console.log(data)

@@ -20,57 +20,158 @@ class Evaluasi extends Controller {
 		$em = array_filter($data, fn($row) => $row['tipe'] == 'em');
 		$ed = array_filter($data, fn($row) => $row['tipe'] == 'ed');
 
-		$et_mod = array_map(function($row) use ($client,$data_user,$now) {
+		// ========================================================================
+		$ID = $client->formattedId('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',21);
+		// ========================================================================
+		$et_res = array_reduce($et, fn ($carry, $item) => $carry+$item['s'],0);
+		$et_class = "Pengetahuan Kurang";
+		if($et_res>7) {
+			$et_class = "Pengetahuan Baik";
+		} elseif($et_res>5) {
+			$et_class = "Pengetahuan Cukup";
+		}
+		$et_result_id = $ID;
+		$et_result = [
+			'id' => $et_result_id,
+			'user_role_id' => $data_user->id,
+			't' => $et_res,
+			'c' => $et_class,
+			'created_at' => $now,
+			'updated_at' => $now
+		];
+		// ------------------------------------------------------------------------
+		$et_mod = array_map(function($row) use ($client,$data_user, $et_result_id,$now) {
 			unset($row['tipe']);
 			$row['id'] = $client->formattedId('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',21);
 			$row['user_role_id'] = $data_user->id;
+			$row['result_id'] = $et_result_id;
 			$row['created_at'] = $now;
 			$row['updated_at'] = $now;
 			return $row;
 		}, $et);
+		// ========================================================================
 
-		$es_mod = array_map(function($row) use ($client,$data_user,$now) {
+		// ========================================================================
+		$es_res = array_reduce($es, fn ($carry, $item) => $carry+$item['s'],0);
+		$es_class = "Negatif";
+		if($es_res>= 25) $es_class = "Positif";
+		$es_result_id = $ID;
+		$es_result = [
+			'id' => $es_result_id,
+			'user_role_id' => $data_user->id,
+			't' => $es_res,
+			'c' => $es_class,
+			'created_at' => $now,
+			'updated_at' => $now
+		];
+		// ------------------------------------------------------------------------
+		$es_mod = array_map(function($row) use ($client,$data_user,$es_result_id,$now) {
 			unset($row['tipe']);
 			$row['id'] = $client->formattedId('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',21);
 			$row['user_role_id'] = $data_user->id;
+			$row['result_id'] = $es_result_id;
 			$row['created_at'] = $now;
 			$row['updated_at'] = $now;
 			return $row;
 		}, $es);
+		// ========================================================================
 
-		$ep_mod = array_map(function($row) use ($client,$data_user,$now) {
+		// ========================================================================
+		$ep_res = array_reduce($ep, fn ($carry, $item) => $carry+$item['s'],0);
+		$ep_class = "Kurang";
+		if($ep_res>=3) $ep_class = "Baik";
+		$ep_result_id = $ID;
+		$ep_result = [
+			'id' => $ep_result_id,
+			'user_role_id' => $data_user->id,
+			't' => $ep_res,
+			'c' => $ep_class,
+			'created_at' => $now,
+			'updated_at' => $now
+		];
+		// ------------------------------------------------------------------------
+		$ep_mod = array_map(function($row) use ($client,$data_user,$ep_result_id,$now) {
 			unset($row['tipe']);
 			$row['id'] = $client->formattedId('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',21);
 			$row['user_role_id'] = $data_user->id;
+			$row['result_id'] = $ep_result_id;
 			$row['created_at'] = $now;
 			$row['updated_at'] = $now;
 			return $row;
 		}, $ep);
+		// ========================================================================
 
-		$em_mod = array_map(function($row) use ($client,$data_user,$now) {
+		// ========================================================================
+		$em_res = array_reduce($em, fn ($carry, $item) => $carry+$item['s'],0);
+		$em_class = "Dilaksanakan";
+		if($em_res>= 25) $em_class = "Tidak Dilaksanakan";
+		$em_result_id = $ID;
+		$em_result = [
+			'id' => $em_result_id,
+			'user_role_id' => $data_user->id,
+			't' => $em_res,
+			'c' => $em_class,
+			'created_at' => $now,
+			'updated_at' => $now
+		];
+		// ------------------------------------------------------------------------
+		$em_mod = array_map(function($row) use ($client,$data_user,$em_result_id,$now) {
 			unset($row['tipe']);
 			$row['id'] = $client->formattedId('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',21);
 			$row['user_role_id'] = $data_user->id;
+			$row['result_id'] = $em_result_id;
 			$row['created_at'] = $now;
 			$row['updated_at'] = $now;
 			return $row;
 		}, $em);
+		// ========================================================================
 
-		$ed_mod = array_map(function($row) use ($client,$data_user,$now) {
+		// ========================================================================
+		$ed_res = array_reduce($ed, fn ($carry, $item) => $carry+$item['s'],0);
+		$ed_class = "Negatif";
+		if($ed_res>= 25) $ed_class = "Positif";
+		$ed_result_id = $ID;
+		$ed_result = [
+			'id' => $ed_result_id,
+			'user_role_id' => $data_user->id,
+			't' => $ed_res,
+			'c' => $ed_class,
+			'created_at' => $now,
+			'updated_at' => $now
+		];
+		// ------------------------------------------------------------------------
+		$ed_mod = array_map(function($row) use ($client,$data_user,$ed_result_id,$now) {
 			unset($row['tipe']);
 			$row['id'] = $client->formattedId('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',21);
 			$row['user_role_id'] = $data_user->id;
+			$row['result_id'] = $ed_result_id;
 			$row['created_at'] = $now;
 			$row['updated_at'] = $now;
 			return $row;
 		}, $ed);
+		// ========================================================================
 
-		DB::transaction(function () use ($et_mod,$es_mod,$ep_mod,$em_mod,$ed_mod) {
+		DB::transaction(function () use (
+			$et_mod, $et_result,
+			$es_mod, $ep_result,
+			$ep_mod, $es_result,
+			$em_mod, $em_result,
+			$ed_mod, $ed_result
+		) {
 		    DB::table('evaluasi_pengetahuan')->insert($et_mod);
+		    DB::table('evaluasi_pengetahuan_result')->insert($et_result);
+
 		    DB::table('evaluasi_sikap')->insert($es_mod);
+		    DB::table('evaluasi_sikap_result')->insert($es_result);
+
 		    DB::table('evaluasi_praktik')->insert($ep_mod);
+		    DB::table('evaluasi_praktik_result')->insert($ep_result);
+
 		    DB::table('evaluasi_motivasi')->insert($em_mod);
+		    DB::table('evaluasi_motivasi_result')->insert($em_result);
+
 		    DB::table('evaluasi_dukungan')->insert($ed_mod);
+		    DB::table('evaluasi_dukungan_result')->insert($ed_result);
 		});
 
 		return $this->afterMiddleware([
@@ -147,11 +248,23 @@ class Evaluasi extends Controller {
 		",['user_role_id'=>$user_role_id]);
 
 		$new_data = array_map(function($row) use ($user_role_id, $created_at) {
-			$row->evaluasi_pengetahuan 	= DB::select("SELECT n,a FROM evaluasi_pengetahuan et WHERE et.deleted_at IS NULL AND et.user_role_id = :user_role_id AND et.created_at = :created_at ORDER BY n ASC",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
-			$row->evaluasi_sikap 		= DB::select("SELECT n,a FROM evaluasi_sikap es WHERE es.deleted_at IS NULL AND es.user_role_id = :user_role_id AND es.created_at = :created_at ORDER BY n ASC",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
-			$row->evaluasi_praktik 		= DB::select("SELECT n,a FROM evaluasi_praktik ep WHERE ep.deleted_at IS NULL AND ep.user_role_id = :user_role_id AND ep.created_at = :created_at ORDER BY n ASC",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
-			$row->evaluasi_motivasi 	= DB::select("SELECT n,a FROM evaluasi_motivasi em WHERE em.deleted_at IS NULL AND em.user_role_id = :user_role_id AND em.created_at = :created_at ORDER BY n ASC",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
-			$row->evaluasi_dukungan 	= DB::select("SELECT n,a FROM evaluasi_dukungan ed WHERE ed.deleted_at IS NULL AND ed.user_role_id = :user_role_id AND ed.created_at = :created_at ORDER BY n ASC",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+			$row->evaluasi_pengetahuan 	= DB::select("SELECT n,a,s FROM evaluasi_pengetahuan et WHERE et.deleted_at IS NULL AND et.user_role_id = :user_role_id AND et.created_at = :created_at ORDER BY n ASC",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+			$row->evaluasi_sikap 		= DB::select("SELECT n,a,s FROM evaluasi_sikap es WHERE es.deleted_at IS NULL AND es.user_role_id = :user_role_id AND es.created_at = :created_at ORDER BY n ASC",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+			$row->evaluasi_praktik 		= DB::select("SELECT n,a,s FROM evaluasi_praktik ep WHERE ep.deleted_at IS NULL AND ep.user_role_id = :user_role_id AND ep.created_at = :created_at ORDER BY n ASC",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+			$row->evaluasi_motivasi 	= DB::select("SELECT n,a,s FROM evaluasi_motivasi em WHERE em.deleted_at IS NULL AND em.user_role_id = :user_role_id AND em.created_at = :created_at ORDER BY n ASC",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+			$row->evaluasi_dukungan 	= DB::select("SELECT n,a,s FROM evaluasi_dukungan ed WHERE ed.deleted_at IS NULL AND ed.user_role_id = :user_role_id AND ed.created_at = :created_at ORDER BY n ASC",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+
+			$evaluasi_pengetahuan_result 	= DB::select("SELECT t,c FROM evaluasi_pengetahuan_result tr WHERE tr.deleted_at IS NULL AND tr.user_role_id = :user_role_id AND tr.created_at = :created_at",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+			$evaluasi_sikap_result 			= DB::select("SELECT t,c FROM evaluasi_sikap_result sr WHERE sr.deleted_at IS NULL AND sr.user_role_id = :user_role_id AND sr.created_at = :created_at",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+			$evaluasi_praktik_result 		= DB::select("SELECT t,c FROM evaluasi_praktik_result ph WHERE ph.deleted_at IS NULL AND ph.user_role_id = :user_role_id AND ph.created_at = :created_at",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+			$evaluasi_motivasi_result 		= DB::select("SELECT t,c FROM evaluasi_motivasi_result mr WHERE mr.deleted_at IS NULL AND mr.user_role_id = :user_role_id AND mr.created_at = :created_at",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+			$evaluasi_dukungan_result 		= DB::select("SELECT t,c FROM evaluasi_dukungan_result dr WHERE dr.deleted_at IS NULL AND dr.user_role_id = :user_role_id AND dr.created_at = :created_at",['user_role_id'=>$user_role_id,'created_at'=>$created_at]);
+
+			$row->evaluasi_pengetahuan_result 	= $evaluasi_pengetahuan_result[0];
+			$row->evaluasi_sikap_result 		= $evaluasi_sikap_result[0];
+			$row->evaluasi_praktik_result 		= $evaluasi_praktik_result[0];
+			$row->evaluasi_motivasi_result 		= $evaluasi_motivasi_result[0];
+			$row->evaluasi_dukungan_result 		= $evaluasi_dukungan_result[0];
 			return $row;
 		},$data);
 

@@ -11,24 +11,17 @@ let columns = {
 	user_role_id: {
 		type: DataTypes.CHAR(21),
 	},
-	n: {
+	t: {
 		type: DataTypes.SMALLINT,
 		comment: "number"
 	},
-	a: {
-		type: DataTypes.CHAR(1),
-		comment: "answer; B: Benar; S: Salah;"
-	},
-	s: {
-		type: DataTypes.SMALLINT,
-		comment: "score"
-	},
-	result_id: {
-		type: DataTypes.CHAR(21)
+	c: {
+		type: DataTypes.TEXT,
+		comment: "class"
 	}
 }
 
-const EvaluasiPengetahuan = sq.define('evaluasi_pengetahuan',
+const EvaluasiPraktikResult = sq.define('evaluasi_praktik_result',
 	columns,
 	{
 		freezeTableName: true,
@@ -40,27 +33,27 @@ const EvaluasiPengetahuan = sq.define('evaluasi_pengetahuan',
 	}
 )
 
-UserRole.hasMany(EvaluasiPengetahuan, { foreignKey: 'user_role_id'})
-EvaluasiPengetahuan.belongsTo(UserRole, { foreignKey: 'user_role_id' })
+UserRole.hasMany(EvaluasiPraktikResult, { foreignKey: 'user_role_id'})
+EvaluasiPraktikResult.belongsTo(UserRole, { foreignKey: 'user_role_id' })
 
-EvaluasiPengetahuan.allias = 'et'
+EvaluasiPraktikResult.allias = 'ph'
 
-EvaluasiPengetahuan.$columns = (whitelist=[]) => {
+EvaluasiPraktikResult.$columns = (whitelist=[]) => {
 	let arr = Object.keys(columns)
 	/*===*/ arr.push('created_at'); arr.push('updated_at');
 	if(whitelist.length) {
 		arr = arr.filter(value => whitelist.includes(value))
 	}
-	return arr.map(str => `${EvaluasiPengetahuan.allias}.${str}`).join(',');
+	return arr.map(str => `${EvaluasiPraktikResult.allias}.${str}`).join(',');
 }
 
-EvaluasiPengetahuan.$colAllias = (whitelist=[]) => {
+EvaluasiPraktikResult.$colAllias = (whitelist=[]) => {
 	let arr = Object.keys(columns)
 	/*===*/ arr.push('created_at'); arr.push('updated_at');
 	if(whitelist.length) {
 		arr = arr.filter(value => whitelist.includes(value))
 	}
-	return arr.map(str => `${EvaluasiPengetahuan.allias}.${str} AS ${EvaluasiPengetahuan.allias}__${str}`).join(',');
+	return arr.map(str => `${EvaluasiPraktikResult.allias}.${str} AS ${EvaluasiPraktikResult.allias}__${str}`).join(',');
 }
 
-export default EvaluasiPengetahuan
+export default EvaluasiPraktikResult

@@ -12,12 +12,19 @@ let columns = {
 		type: DataTypes.CHAR(21),
 	},
 	n: {
-		type: DataTypes.CHAR(4),
-		comment: "number e.g Aa01,Aa02,Aa03,Ab04"
+		type: DataTypes.SMALLINT,
+		comment: "number"
 	},
 	a: {
 		type: DataTypes.CHAR(2),
-		comment: "P1: Sangat Setuju; P0: Setuju; N0: Tidak Setuju; N1: Sangat Tidak Setuju; TT: Ya; FF: Tidak"
+		comment: "SS: Sangat Setuju; S0: Setuju; T0: Tidak Setuju; ST: Sangat Tidak Setuju"
+	},
+	s: {
+		type: DataTypes.SMALLINT,
+		comment: "score"
+	},
+	result_id: {
+		type: DataTypes.CHAR(21)
 	}
 }
 

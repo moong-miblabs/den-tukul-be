@@ -11,24 +11,17 @@ let columns = {
 	user_role_id: {
 		type: DataTypes.CHAR(21),
 	},
-	n: {
+	t: {
 		type: DataTypes.SMALLINT,
 		comment: "number"
 	},
-	a: {
-		type: DataTypes.CHAR(1),
-		comment: "answer; B: Benar; S: Salah;"
-	},
-	s: {
-		type: DataTypes.SMALLINT,
-		comment: "score"
-	},
-	result_id: {
-		type: DataTypes.CHAR(21)
+	c: {
+		type: DataTypes.TEXT,
+		comment: "class"
 	}
 }
 
-const EvaluasiPengetahuan = sq.define('evaluasi_pengetahuan',
+const EvaluasiPengetahuanResult = sq.define('evaluasi_pengetahuan_result',
 	columns,
 	{
 		freezeTableName: true,
@@ -40,27 +33,27 @@ const EvaluasiPengetahuan = sq.define('evaluasi_pengetahuan',
 	}
 )
 
-UserRole.hasMany(EvaluasiPengetahuan, { foreignKey: 'user_role_id'})
-EvaluasiPengetahuan.belongsTo(UserRole, { foreignKey: 'user_role_id' })
+UserRole.hasMany(EvaluasiPengetahuanResult, { foreignKey: 'user_role_id'})
+EvaluasiPengetahuanResult.belongsTo(UserRole, { foreignKey: 'user_role_id' })
 
-EvaluasiPengetahuan.allias = 'et'
+EvaluasiPengetahuanResult.allias = 'tr'
 
-EvaluasiPengetahuan.$columns = (whitelist=[]) => {
+EvaluasiPengetahuanResult.$columns = (whitelist=[]) => {
 	let arr = Object.keys(columns)
 	/*===*/ arr.push('created_at'); arr.push('updated_at');
 	if(whitelist.length) {
 		arr = arr.filter(value => whitelist.includes(value))
 	}
-	return arr.map(str => `${EvaluasiPengetahuan.allias}.${str}`).join(',');
+	return arr.map(str => `${EvaluasiPengetahuanResult.allias}.${str}`).join(',');
 }
 
-EvaluasiPengetahuan.$colAllias = (whitelist=[]) => {
+EvaluasiPengetahuanResult.$colAllias = (whitelist=[]) => {
 	let arr = Object.keys(columns)
 	/*===*/ arr.push('created_at'); arr.push('updated_at');
 	if(whitelist.length) {
 		arr = arr.filter(value => whitelist.includes(value))
 	}
-	return arr.map(str => `${EvaluasiPengetahuan.allias}.${str} AS ${EvaluasiPengetahuan.allias}__${str}`).join(',');
+	return arr.map(str => `${EvaluasiPengetahuanResult.allias}.${str} AS ${EvaluasiPengetahuanResult.allias}__${str}`).join(',');
 }
 
-export default EvaluasiPengetahuan
+export default EvaluasiPengetahuanResult

@@ -80,7 +80,7 @@ class Intervensi extends Controller {
 		]);
     }
 
-    public function get(Request $request) {
+    public function get() {
 		$data = DB::select("SELECT d.id, u.nama_user, d.total, d.klasifikasi, d.created_at FROM intervensi d LEFT JOIN user_role ur ON d.user_role_id = ur.id LEFT JOIN users u ON ur.user_id = u.id WHERE d.deleted_at IS NULL ORDER BY d.created_at DESC");
 		$new_data = [];
 		$i = 1;
@@ -96,6 +96,18 @@ class Intervensi extends Controller {
 			'message'	=> "",
 			'desc'		=> [],
 			'data'		=> $new_data
+		]);
+    }
+
+    public function byId($id) {
+		$intervensi = DB::select("SELECT ur.id,uu.nama_user AS uu__nama_user,uu.jenis_kelamin AS uu__jenis_kelamin,uu.tanggal_lahir AS uu__tanggal_lahir,uu.agama_id AS uu__agama_id,uu.jenjang_id AS uu__jenjang_id, i.* FROM intervensi i LEFT JOIN user_role ur ON i.user_role_id = ur.id LEFT JOIN users uu ON ur.user_id = uu.id WHERE i.deleted_at IS NULL AND i.id = :id ORDER BY i.created_at DESC",['id'=>$id]);
+		return $this->afterMiddleware([
+			'from'		=> "Deteksi@byId",
+			'code'		=> 200,
+			'status'	=> "success",
+			'message'	=> "",
+			'desc'		=> [],
+			'data'		=> $intervensi[0]
 		]);
     }
 }

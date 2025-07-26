@@ -16,8 +16,15 @@ let columns = {
 		comment: "number"
 	},
 	a: {
+		type: DataTypes.CHAR(1),
+		comment: "answer; Y: Ya/Dilakukan; T: Tidak/Tidak Dilakukan;"
+	},
+	s: {
 		type: DataTypes.SMALLINT,
-		comment: "answer"
+		comment: "score"
+	},
+	result_id: {
+		type: DataTypes.CHAR(21)
 	}
 }
 

@@ -11,24 +11,17 @@ let columns = {
 	user_role_id: {
 		type: DataTypes.CHAR(21),
 	},
-	n: {
+	t: {
 		type: DataTypes.SMALLINT,
 		comment: "number"
 	},
-	a: {
-		type: DataTypes.CHAR(1),
-		comment: "answer; B: Benar; S: Salah;"
-	},
-	s: {
-		type: DataTypes.SMALLINT,
-		comment: "score"
-	},
-	result_id: {
-		type: DataTypes.CHAR(21)
+	c: {
+		type: DataTypes.TEXT,
+		comment: "class"
 	}
 }
 
-const EvaluasiPengetahuan = sq.define('evaluasi_pengetahuan',
+const EvaluasiMotivasiResult = sq.define('evaluasi_motivasi_result',
 	columns,
 	{
 		freezeTableName: true,
@@ -40,27 +33,27 @@ const EvaluasiPengetahuan = sq.define('evaluasi_pengetahuan',
 	}
 )
 
-UserRole.hasMany(EvaluasiPengetahuan, { foreignKey: 'user_role_id'})
-EvaluasiPengetahuan.belongsTo(UserRole, { foreignKey: 'user_role_id' })
+UserRole.hasMany(EvaluasiMotivasiResult, { foreignKey: 'user_role_id'})
+EvaluasiMotivasiResult.belongsTo(UserRole, { foreignKey: 'user_role_id' })
 
-EvaluasiPengetahuan.allias = 'et'
+EvaluasiMotivasiResult.allias = 'mr'
 
-EvaluasiPengetahuan.$columns = (whitelist=[]) => {
+EvaluasiMotivasiResult.$columns = (whitelist=[]) => {
 	let arr = Object.keys(columns)
 	/*===*/ arr.push('created_at'); arr.push('updated_at');
 	if(whitelist.length) {
 		arr = arr.filter(value => whitelist.includes(value))
 	}
-	return arr.map(str => `${EvaluasiPengetahuan.allias}.${str}`).join(',');
+	return arr.map(str => `${EvaluasiMotivasiResult.allias}.${str}`).join(',');
 }
 
-EvaluasiPengetahuan.$colAllias = (whitelist=[]) => {
+EvaluasiMotivasiResult.$colAllias = (whitelist=[]) => {
 	let arr = Object.keys(columns)
 	/*===*/ arr.push('created_at'); arr.push('updated_at');
 	if(whitelist.length) {
 		arr = arr.filter(value => whitelist.includes(value))
 	}
-	return arr.map(str => `${EvaluasiPengetahuan.allias}.${str} AS ${EvaluasiPengetahuan.allias}__${str}`).join(',');
+	return arr.map(str => `${EvaluasiMotivasiResult.allias}.${str} AS ${EvaluasiMotivasiResult.allias}__${str}`).join(',');
 }
 
-export default EvaluasiPengetahuan
+export default EvaluasiMotivasiResult

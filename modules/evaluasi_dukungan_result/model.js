@@ -11,24 +11,17 @@ let columns = {
 	user_role_id: {
 		type: DataTypes.CHAR(21),
 	},
-	n: {
+	t: {
 		type: DataTypes.SMALLINT,
 		comment: "number"
 	},
-	a: {
-		type: DataTypes.CHAR(1),
-		comment: "answer; B: Benar; S: Salah;"
-	},
-	s: {
-		type: DataTypes.SMALLINT,
-		comment: "score"
-	},
-	result_id: {
-		type: DataTypes.CHAR(21)
+	c: {
+		type: DataTypes.TEXT,
+		comment: "class"
 	}
 }
 
-const EvaluasiPengetahuan = sq.define('evaluasi_pengetahuan',
+const EvaluasiDukunganResult = sq.define('evaluasi_dukungan_result',
 	columns,
 	{
 		freezeTableName: true,
@@ -40,27 +33,27 @@ const EvaluasiPengetahuan = sq.define('evaluasi_pengetahuan',
 	}
 )
 
-UserRole.hasMany(EvaluasiPengetahuan, { foreignKey: 'user_role_id'})
-EvaluasiPengetahuan.belongsTo(UserRole, { foreignKey: 'user_role_id' })
+UserRole.hasMany(EvaluasiDukunganResult, { foreignKey: 'user_role_id'})
+EvaluasiDukunganResult.belongsTo(UserRole, { foreignKey: 'user_role_id' })
 
-EvaluasiPengetahuan.allias = 'et'
+EvaluasiDukunganResult.allias = 'dr'
 
-EvaluasiPengetahuan.$columns = (whitelist=[]) => {
+EvaluasiDukunganResult.$columns = (whitelist=[]) => {
 	let arr = Object.keys(columns)
 	/*===*/ arr.push('created_at'); arr.push('updated_at');
 	if(whitelist.length) {
 		arr = arr.filter(value => whitelist.includes(value))
 	}
-	return arr.map(str => `${EvaluasiPengetahuan.allias}.${str}`).join(',');
+	return arr.map(str => `${EvaluasiDukunganResult.allias}.${str}`).join(',');
 }
 
-EvaluasiPengetahuan.$colAllias = (whitelist=[]) => {
+EvaluasiDukunganResult.$colAllias = (whitelist=[]) => {
 	let arr = Object.keys(columns)
 	/*===*/ arr.push('created_at'); arr.push('updated_at');
 	if(whitelist.length) {
 		arr = arr.filter(value => whitelist.includes(value))
 	}
-	return arr.map(str => `${EvaluasiPengetahuan.allias}.${str} AS ${EvaluasiPengetahuan.allias}__${str}`).join(',');
+	return arr.map(str => `${EvaluasiDukunganResult.allias}.${str} AS ${EvaluasiDukunganResult.allias}__${str}`).join(',');
 }
 
-export default EvaluasiPengetahuan
+export default EvaluasiDukunganResult

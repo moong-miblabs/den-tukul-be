@@ -23542,10 +23542,10 @@ INSERT INTO ref_kelurahan (id, nama_kelurahan, kecamatan_id, created_at, updated
 INSERT INTO ref_kelurahan (id, nama_kelurahan, kecamatan_id, created_at, updated_at) VALUES ('3674010006', 'Bakti Jaya', '286307', NOW(), NOW()) ON CONFLICT (id) DO NOTHING;
 
 
-INSERT INTO users(id,nama_user,email_user,whatsapp_user,username_user,password_user,created_at,updated_at) VALUES
-    ('aaaaaaaaaaaaaaaaaaaaa','admin alice','a@gmail.com','6285741228893','a','\$2a\$10\$DNMSD58vDTm8QrItQQcCK.crTa4ZB3G.hY46d1SF7i91pR7MUz1lO',NOW(),NOW()),
-    ('rrrrrrrrrrrrrrrrrrrrr','responden robert','r@gmail.com','6285741228894','r','\$2a\$10\$M2XTT/KQ.omrayOePjySXeQJ1CHdK8MQcemwPnfGn8BaVJVUTOoQC',NOW(),NOW()),
-    ('bbbbbbbbbbbbbbbbbbbbb','both bob','b@gmail.com','6285741228895','b','\$2a\$10\$3h82NTnionWhnT8sgPBj5OdeUKoadWWUModjqS5dGulpqZDzML3o6',NOW(),NOW())
+INSERT INTO users(id,nama_user,email_user,whatsapp_user,username_user,password_user,created_at,updated_at,jenis_kelamin,tanggal_lahir,agama_id,jenjang_id) VALUES
+    ('aaaaaaaaaaaaaaaaaaaaa','admin alice','a@gmail.com','6285741228893','a','\$2a\$10\$DNMSD58vDTm8QrItQQcCK.crTa4ZB3G.hY46d1SF7i91pR7MUz1lO',NOW(),NOW(),NULL,NULL,NULL,NULL),
+    ('rrrrrrrrrrrrrrrrrrrrr','responden robert','r@gmail.com','6285741228894','r','\$2a\$10\$M2XTT/KQ.omrayOePjySXeQJ1CHdK8MQcemwPnfGn8BaVJVUTOoQC',NOW(),NOW(),'L','1993-06-10',1,35),
+    ('bbbbbbbbbbbbbbbbbbbbb','both bob','b@gmail.com','6285741228895','b','\$2a\$10\$3h82NTnionWhnT8sgPBj5OdeUKoadWWUModjqS5dGulpqZDzML3o6',NOW(),NOW(),NULL,NULL,NULL,NULL)
 ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO user_role(id,user_id,role_id,created_at,updated_at) VALUES
