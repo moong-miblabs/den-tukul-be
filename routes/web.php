@@ -93,3 +93,11 @@ $router->group(['prefix' => 'evaluasi'], function () use ($router,$controller) {
     $router->get('/{user_role_id}', ['uses' => $controller.'@listCreatedAt','middleware'=>'is_admin']);
     $router->get('/{user_role_id}/{created_at}', ['uses' => $controller.'@detailsById','middleware'=>'is_admin']);
 });
+
+$controller = 'Chart';
+$router->group(['prefix' => 'chart'], function () use ($router,$controller) {
+    $router->get('/evaluasi-pengetahuan', ['uses' => $controller.'@evaluasiPengetahuan','middleware'=>'is_admin']);
+    $router->get('/deteksi', ['uses' => $controller.'@deteksi','middleware'=>'is_admin']);
+    $router->get('/evaluasi-praktik', ['uses' => $controller.'@evaluasiPraktik','middleware'=>'is_admin']);
+    $router->get('/evaluasi-sikap', ['uses' => $controller.'@evaluasiSikap','middleware'=>'is_admin']);
+});
