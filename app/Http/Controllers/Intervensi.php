@@ -81,7 +81,20 @@ class Intervensi extends Controller {
     }
 
     public function get() {
-		$data = DB::select("SELECT d.id, u.nama_user, d.total, d.klasifikasi, d.created_at FROM intervensi d LEFT JOIN user_role ur ON d.user_role_id = ur.id LEFT JOIN users u ON ur.user_id = u.id WHERE d.deleted_at IS NULL ORDER BY d.created_at DESC");
+		$data = DB::select("
+			SELECT
+				i.id, u.nama_user, i.total, i.klasifikasi, i.created_at
+			FROM
+				intervensi i
+			LEFT JOIN user_role ur ON i.user_role_id = ur.id
+			LEFT JOIN users u ON ur.user_id = u.id
+			WHERE
+				i.deleted_at IS NULL
+				AND ur.deleted_at IS NULL
+				AND u.deleted_at IS NULL
+			ORDER BY
+				i.created_at DESC
+		");
 		$new_data = [];
 		$i = 1;
 		foreach ($data as $row) {

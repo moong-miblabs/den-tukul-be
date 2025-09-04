@@ -212,10 +212,19 @@ class Evaluasi extends Controller {
 
 	public function listCreatedAt(Request $request, $user_role_id) {
 		$data = DB::select("
-			SELECT ur.id,uu.nama_user AS uu__nama_user,uu.jenis_kelamin AS uu__jenis_kelamin,uu.tanggal_lahir AS uu__tanggal_lahir,uu.agama_id AS uu__agama_id,uu.jenjang_id AS uu__jenjang_id
-			FROM user_role ur
+			SELECT
+				ur.id,uu.nama_user AS uu__nama_user,
+				uu.jenis_kelamin AS uu__jenis_kelamin,
+				uu.tanggal_lahir AS uu__tanggal_lahir,
+				uu.agama_id AS uu__agama_id,
+				uu.jenjang_id AS uu__jenjang_id
+			FROM
+				user_role ur
 			LEFT JOIN users uu ON ur.user_id = uu.id
-			WHERE ur.id = :user_role_id
+			WHERE
+				ur.deleted_at IS NULL
+				AND uu.deleted_at IS NULL
+				AND ur.id = :user_role_id
 		",['user_role_id'=>$user_role_id]);
 
 		$new_data = array_map(function($row) use ($user_role_id) {
